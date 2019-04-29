@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Morado"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Tv_Elige_como_iniciar"
+        android:layout_width="226dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/Label_Inicio_de_Sesion"
+        android:textAlignment="center"
+        android:textColor="@color/Verde"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Iv_Logo" />
+
+    <ImageView
+        android:id="@+id/Iv_Logo"
+        android:layout_width="358dp"
+        android:layout_height="234dp"
+        android:contentDescription="@string/ContentDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_principal" />
+
+    <Button
+        android:id="@+id/Btn_Usuario"
+        android:layout_width="290dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/estilo_botones"
+        android:drawableStart="@drawable/usuario_boton_icono"
+        android:drawablePadding="-80dp"
+        android:onClick="alPresionarBoton"
+        android:paddingStart="90dp"
+        android:paddingEnd="2dp"
+        android:text="@string/Btn_Usuario_TEXT"
+        android:textAlignment="center"
+        android:textColor="@color/Morado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Tv_Elige_como_iniciar" />
+
+    <Button
+        android:id="@+id/Btn_CetrePartner"
+        android:layout_width="290dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/estilo_botones"
+        android:drawableStart="@drawable/cetre_partner_boton_icono"
+        android:drawablePadding="-20dp"
+        android:onClick="alPresionarBoton"
+        android:paddingStart="60dp"
+        android:paddingEnd="2dp"
+        android:text="@string/Btn_CetrePartner_TEXT"
+        android:textAlignment="center"
+        android:textColor="@color/Morado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Btn_Usuario" />
+
+</android.support.constraint.ConstraintLayout>

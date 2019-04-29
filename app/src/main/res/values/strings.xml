@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Cetre Express</string>
+    <string name="ContentDescription">Descripción</string>
+    <string name="Label_Inicio_de_Sesion">ELIGE COMO INICIAR</string>
+    <string name="Btn_Usuario_TEXT">USUARIO   </string>
+    <string name="Btn_CetrePartner_TEXT">CETRE PARTNER   </string>
+    <string name="TextBox_Nombre"> Nombre</string>
+    <string name="TextBox_Numero_Cedula"> Número de cédula</string>
+    <string name="TextBox_Contraseña">Contraseña</string>
+    <string name="Btn_Registrarte">REGISTRARTE</string>
+    <string name="Btn_Iniciar_Sesion">INICIAR SESION</string>
+    <string name="Btn_ContraseñaOlvidada"> ¿Olvidaste tu contraseña?</string>
+    <string name="MisPedidos"> Mis Pedidos</string>
+    <string name="Ubicacion_Actual">Ubicación Actual</string>
+    <string name="Sobres">SOBRES</string>
+    <string name="PRECIO">$1,99.99</string>
+    <string name="Confirmar">CONFIRMAR</string>
+    <string name="Confirmar_Solicitud">CONFIRMAR SOLICITUD</string>
+    <string name="CGOBACK">Cetre Go</string>
+    <string name="PDS">Precio del servicio</string>
+    <string name="KMA">Km adicionales</string>
+    <string name="TE">TOTAL ESTIMADO</string>
+    <string name="Aviso">El precio del servicio puede variar ligeramente a causa de modificaciones en el punto de entrega.</string>
+    <string name="HoraEntrega">Lo antes posible</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="DireccionEntrega">Ingrese Dirección de entrega</string>
+    <string name="facebook_app_id">441902103223357</string>
+    <string name="fb_login_protocol_scheme">fb441902103223357</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="Options">
+        <item>Selecciona la categoria</item>
+        <item>Go</item>
+        <item>Shop</item>
+        <item>Gestion</item>
+        <item>Home</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home_usuario2">HomeUsuario2</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>

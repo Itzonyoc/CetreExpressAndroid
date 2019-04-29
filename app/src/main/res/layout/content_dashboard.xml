@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Morado"
+    tools:context=".Menu_Usuario_Dashboard"
+    tools:showIn="@layout/activity_menu__usuario__dashboard">
+
+    <SearchView
+        android:id="@+id/SearchBar"
+        android:layout_width="237dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/estilo_searchbar"
+        android:iconifiedByDefault="false"
+        android:queryHint="¿Qué necesitas?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UbicacionActual" />
+
+    <ImageButton
+        android:id="@+id/CetreGoButton"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/boton1"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="pressButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SearchBar" />
+
+    <ImageButton
+        android:id="@+id/GestionButton"
+        android:layout_width="117dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/boton4"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="pressButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SearchBar" />
+
+    <ImageButton
+        android:id="@+id/HomeButton"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/boton3"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="pressButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CetreGoButton" />
+
+    <ImageButton
+        android:id="@+id/ShopButton"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="192dp"
+        android:background="@drawable/boton2"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="pressButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GestionButton" />
+
+    <Button
+        android:id="@+id/MisPedidosButton"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:background="@drawable/estilo_botones"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="pressButton"
+        android:text="@string/MisPedidos"
+        android:textAlignment="center"
+        android:textColor="@color/Morado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/UbicacionActual"
+        android:layout_width="231dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+        android:onClick="pressButton"
+        android:paddingStart="50dp"
+        android:paddingEnd="30dp"
+        android:text="@string/Ubicacion_Actual"
+        android:textColor="@color/Verde"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/UserButton"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/menu_user_icon"
+        android:onClick="pressButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/EstrellaCentral"
+        android:layout_width="78dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/ContentDescription"
+        app:layout_constraintBottom_toTopOf="@+id/MisPedidosButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SearchBar"
+        app:layout_constraintVertical_bias="0.411"
+        app:srcCompat="@drawable/boton_central" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cetre_Go_Usuario">
+
+    <ImageView
+        android:id="@+id/ToolBarSuperior"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:contentDescription="@string/ContentDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/Morado" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="154dp"
+        android:layout_height="0dp"
+        android:background="@color/Morado"
+        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
+        android:drawablePadding="-30dp"
+        android:onClick="onPressedBackButton"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        android:text="@string/CGOBACK"
+        android:textColor="@color/Verde"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ToolBarSuperior"
+        app:layout_constraintEnd_toEndOf="@+id/ToolBarSuperior"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ToolBarSuperior"
+        app:layout_constraintTop_toTopOf="@+id/ToolBarSuperior"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerView_catalogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/Morado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ToolBarSuperior" />
+
+</android.support.constraint.ConstraintLayout>

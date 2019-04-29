@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Morado"
+    tools:context=".RegistroUsuarioActivity">
+
+    <ImageView
+        android:id="@+id/Iv_Logo_Registro"
+        android:layout_width="256dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/ContentDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_principal" />
+
+    <EditText
+        android:id="@+id/Et_Nombre"
+        android:layout_width="302dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:background="@drawable/estilo_text_box"
+        android:drawableStart="@drawable/icono_nombre"
+        android:ems="10"
+        android:hint="@string/TextBox_Nombre"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Iv_Logo_Registro"
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/Et_Numero_de_cedula"
+        android:layout_width="302dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:background="@drawable/estilo_text_box"
+        android:drawableStart="@drawable/icono_numero_de_cedula"
+        android:ems="10"
+        android:hint="@string/TextBox_Numero_Cedula"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Et_Nombre"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/Et_Contrasena"
+        android:layout_width="302dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:background="@drawable/estilo_text_box"
+        android:drawableStart="@drawable/icono_contrasena"
+        android:ems="10"
+        android:hint="@string/TextBox_Contraseña"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:paddingEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Et_Numero_de_cedula"
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/Btn_Registro"
+        android:layout_width="302dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/estilo_botones"
+        android:onClick="alPresionarBotonRegistro"
+        android:text="@string/Btn_Registrarte"
+        android:textAlignment="center"
+        android:textColor="@color/Morado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Et_Contrasena" />
+
+    <Button
+        android:id="@+id/Btn_IniciarSesion"
+        android:layout_width="302dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="alPresionarBotonRegistro"
+        android:text="@string/Btn_Iniciar_Sesion"
+        android:textColor="@color/Verde"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Btn_Registro" />
+
+    <FrameLayout
+        android:id="@+id/FrameFacebookBTNR"
+        android:layout_width="218dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OR_tv">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/FB_singup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/fb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3B5998"
+            android:drawableLeft="@drawable/com_facebook_button_icon_blue"
+            android:onClick="onClickFacebookButton"
+            android:paddingStart="10dp"
+            android:text="Registrarte con Facebook"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/FrameGoogleBTNIS"
+        android:layout_width="218dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FrameFacebookBTNR">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/GoogleSUBtn"
+            android:layout_width="267dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="signUpGoogle"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FB_login_button" />
+
+        <Button
+            android:id="@+id/GoogleSU"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/Blanco"
+            android:drawableStart="@drawable/googleg_standard_color_18"
+            android:onClick="onClickGoogleButton"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="Registrarte con Google"
+            android:textAllCaps="false"
+            android:textColor="@color/com_facebook_likeboxcountview_text_color"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/OR_tv"
+        android:layout_width="263dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="O puedes registrarte via:"
+        android:textAlignment="center"
+        android:textColor="@color/Blanco"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Btn_IniciarSesion" />
+
+</android.support.constraint.ConstraintLayout>

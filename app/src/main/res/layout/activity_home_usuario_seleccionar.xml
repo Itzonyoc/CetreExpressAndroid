@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeUsuarioSeleccionar">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Morado"
+            app:popupTheme="@style/AppTheme.PopupOverlay1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/Verde"
+                android:textStyle="bold" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapViewMenu"
+        android:layout_width="0dp"
+        android:layout_height="295dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <Button
+        android:id="@+id/regresar"
+        android:layout_width="0dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/estilo_botones"
+        android:drawableTop="@drawable/ic_keyboard_arrow_left_black_24dp"
+        android:text="Atras"
+        android:textColor="@color/Morado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapViewMenu"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="206dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="¿Qué necesitas?"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapViewMenu" />
+
+    <ImageButton
+        android:id="@+id/homeBtn"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:background="@drawable/home_btn"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="option"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cetreGoBtn" />
+
+    <ImageButton
+        android:id="@+id/shopBtn"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shop_btn"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="option"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestionBtn" />
+
+    <ImageButton
+        android:id="@+id/cetreGoBtn"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:background="@drawable/cetre_go_btn"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="option"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageButton
+        android:id="@+id/gestionBtn"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/gestion_btn"
+        android:contentDescription="@string/ContentDescription"
+        android:onClick="option"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+</android.support.constraint.ConstraintLayout>

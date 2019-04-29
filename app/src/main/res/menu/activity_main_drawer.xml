@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dat_personales"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Datos Personales"
+            android:visible="true" />
+        <item
+            android:id="@+id/met_pago"
+            android:icon="@drawable/ic_credit_card_black_24dp"
+            android:title="Metodos de pago" />
+        <item
+            android:id="@+id/mis_domicilios"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Mis domicilios" />
+        <item
+            android:id="@+id/pedidos"
+            android:icon="@drawable/ic_settings_backup_restore_black_24dp"
+            android:title="Pedidos" />
+        <item
+            android:id="@+id/contacto"
+            android:icon="@drawable/ic_mail_outline_black_24dp"
+            android:title="Contacto" />
+    </group>
+
+    <item android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/cerrar_sesion"
+                android:icon="@drawable/ic_open_in_new_black_24dp"
+                android:title="Cerrar Sesión" />
+
+        </menu>
+    </item>
+
+</menu>
