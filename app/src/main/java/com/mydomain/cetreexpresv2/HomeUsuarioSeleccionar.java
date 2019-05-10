@@ -3,46 +3,42 @@ package com.mydomain.cetreexpresv2;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
+//******************************************************************CLASE DONDE SE SELECCIONA EL SERIVICO A PEDIR
 public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    int _ID;
+    //-------------------------------------------------Variables de la clase
     ArrayList<String> Nombre = new ArrayList<>();
     ArrayList<Integer> Id = new ArrayList<>();
     ArrayList<String> Avatar = new ArrayList<>();
     String nombre,cedula;
     private MapView mapView;
     private GoogleMap gmap;
-    private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC4znjtsuSN9zI24KbDDbzZi4-Q3xqGF_s";
+    private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC4znjtsuSN9zI24KbDDbzZi4-Q3xqGF_s";//Key de google maps
     String LatR,LatE,LongR,LongE;
 
+    //----------------------------------------------------Metodo onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_usuario_seleccionar);
+        //Se declaran los objetos de la pantalla de diseño
         Id= Objects.requireNonNull(getIntent().getExtras()).getIntegerArrayList("AL_ID");
         Nombre=getIntent().getExtras().getStringArrayList("AL_DSC");
         Avatar=getIntent().getExtras().getStringArrayList("AL_Av");
@@ -52,6 +48,7 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
         LatE=getIntent().getExtras().getString("LaENTREGA");
         LongR=getIntent().getExtras().getString("LongRECIBO");
         LongE=getIntent().getExtras().getString("LongENTREGA");
+        //Se revisan los permisos necesarios
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -60,15 +57,19 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
+        //Se inicializa el mapa
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
+        //Crea el mapa de google
         mapView = findViewById(R.id.mapViewMenu);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
     }
 
+    //-----------------------------------Al dar click en alguna opción manda los datos necesarios de
+    // esa opción e inicia la pantalla de confirmar con los datos que se envian
     public void option(View view){
 
         Intent i;
@@ -77,10 +78,11 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
         switch (view.getId()){
 
             case R.id.homeBtn:
-                i = new Intent(this,Cetre_Go_Usuario.class);
+                i = new Intent(this,Home_Usuario_Confirmar.class);
                 Bundle bundle3 = new Bundle();
                 for(int x=0;x<size;x++){
                     if(Nombre.get(x).equals("Home")){
+                        bundle3.putString("ARTICULO", Nombre.get(x));
                         bundle3.putInt("_ID", Id.get(x));
                     }
                 }
@@ -96,10 +98,11 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
                 startActivity(i);
                 break;
             case R.id.cetreGoBtn:
-                i = new Intent(this,Cetre_Go_Usuario.class);
+                i = new Intent(this,Home_Usuario_Confirmar.class);
                 Bundle bundle1 = new Bundle();
                 for(int x=0;x<size;x++){
                     if(Nombre.get(x).equals("Go")){
+                        bundle1.putString("ARTICULO", Nombre.get(x));
                         bundle1.putInt("_ID", Id.get(x));
                     }
                 }
@@ -115,10 +118,11 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
                 startActivity(i);
                 break;
             case R.id.shopBtn:
-                i = new Intent(this,Cetre_Go_Usuario.class);
+                i = new Intent(this,Home_Usuario_Confirmar.class);
                 Bundle bundle4 = new Bundle();
                 for(int x=0;x<size;x++){
                     if(Nombre.get(x).equals("Shop")){
+                        bundle4.putString("ARTICULO", Nombre.get(x));
                         bundle4.putInt("_ID", Id.get(x));
                     }
                 }
@@ -134,10 +138,12 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
                 startActivity(i);
                 break;
             case R.id.gestionBtn:
-                i = new Intent(this,Cetre_Go_Usuario.class);
+                i = new Intent(this,Home_Usuario_Confirmar.class);
                 Bundle bundle2 = new Bundle();
                 for(int x=0;x<size;x++){
+
                     if(Nombre.get(x).equals("Gestión")){
+                        bundle2.putString("ARTICULO", Nombre.get(x));
                         bundle2.putInt("_ID", Id.get(x));
                     }
                 }
@@ -152,9 +158,27 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
                 i.putExtras(bundle2);
                 startActivity(i);
                 break;
+            case R.id.Regresar:
+                onBackPressed();
+                        break;
                 default:
                     break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(this,Home_Usuarios_Domicilios.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("ID", 1);
+        bundle.putIntegerArrayList("AL_ID", Id);
+        bundle.putStringArrayList("AL_DSC", Nombre);
+        bundle.putStringArrayList("AL_Av", Avatar);
+        bundle.putString("NOMBRE", nombre);
+        bundle.putString("CEDULA", cedula);
+        i.putExtras(bundle);
+        startActivity(i);
     }
 
     @Override
@@ -203,8 +227,10 @@ public class HomeUsuarioSeleccionar extends AppCompatActivity implements OnMapRe
     @Override
     public void onLowMemory() { super.onLowMemory();mapView.onLowMemory(); }
 
+
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {//Cuando se inicia el mapa se setean las direcciones de entrega y recibo en el mapa
 
         Double LatitudEntrega = Double.valueOf(LatE);
         Double LatitudRecibo = Double.valueOf(LatR);

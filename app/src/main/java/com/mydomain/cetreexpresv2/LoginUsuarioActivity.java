@@ -17,9 +17,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -39,18 +36,15 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.Authenticator;
 import java.util.Arrays;
 import java.util.Objects;
-
+ //****************************************************************CLASE DE PANTALLA PARA INICIO DE SESIÓN
 public class LoginUsuarioActivity extends AppCompatActivity implements TextWatcher, CompoundButton.OnCheckedChangeListener, GoogleApiClient.OnConnectionFailedListener {
 
+    //----------------------------------------------------Variables de la clase
     EditText Numero_de_cedula_Login, Contrasena_Login;
-    Boolean Acceso=true;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     CheckBox checkBox;
@@ -64,31 +58,28 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
     Integer ID = 0;
     Button Google,fb;
     SignInButton signInButtonGoogle;
-    String first_name;
-    String last_name;
     String email;
-    String fb_id;
-    String image_url;
-    LoginButton loginButton;
     String name;
 
 
+    //---------------------------------------------------------------------------Metodo onCreate
     @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_usuario);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(getApplicationContext());//Se inicializa el boton de Facebook
         AppEventsLogger.activateApp(this);
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         checkBox=findViewById(R.id.CB_RecordarDatos);
         ID = Objects.requireNonNull(getIntent().getExtras()).getInt("ID");
-        if(sharedPreferences.getBoolean(KEY_REMEBER, false)){
+        if(sharedPreferences.getBoolean(KEY_REMEBER, false)){//Revisa si están los datos de inicio de sesión recordados
             checkBox.setChecked(true);
         }else{
             checkBox.setChecked(false);
         }
+        //Se declaran los elementos del la pantalla de diseño
         Numero_de_cedula_Login = (EditText) findViewById(R.id.Et_Numero_de_cedula_Login);
         Contrasena_Login = (EditText) findViewById(R.id.Et_Contrasena_Login);
         Numero_de_cedula_Login.setText(sharedPreferences.getString(KEY_USER, ""));
@@ -102,7 +93,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
+        //Despues de presionar el boton de google manda a esta actividad la cual si el REQUESTCODE es el mismo que el inicio de sesión entonce autentifica por google
         if(requestCode==REQCODE){
             super.onActivityResult(requestCode, resultCode, data);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -115,14 +106,15 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
         }
     }
 
-
+    //--------------------------------------------------------Boton de iniciar sesión
     public void alPresionarBotonLogin(View view){
         switch(view.getId()){
             case R.id.Btn_Contraseña_Olvidada:
                 //mandar a restablecer contraseña
                 break;
-            case R.id.Btn_IniciarSesion_LoginActivity:
+            case R.id.Btn_IniciarSesion_LoginActivity://Inicia sesión de manera normal
 
+                //Realiza verificaciones de longitud de contraseña, de tipo de usuario,etc.
                 if(Numero_de_cedula_Login.length() == 0 && Contrasena_Login.length() == 0){
 
                     Numero_de_cedula_Login.setError("Ingresa tu numero de cedula");
@@ -157,7 +149,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
                 }
 
                 break;
-            case R.id.Btn_Registrarse_LoginActivity:
+            case R.id.Btn_Registrarse_LoginActivity://Manda a la pantalla de registrarse
                 Intent i = new Intent(this,RegistroUsuarioActivity.class);
                 i.putExtra("ID", ID);
                 i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -193,6 +185,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
     public void afterTextChanged(Editable s) {
 
     }
+    //---------------------------------------revisa las preferencias del usuario
     private void managePrefs(){
         if(checkBox.isChecked()){
             editor.putString(KEY_USER, Numero_de_cedula_Login.getText().toString().trim());
@@ -219,7 +212,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
+    //---------------------------------------------------------Al presionar boton de facebook
     public void onClickFacebookButton(View view) {
         if (view == fb) {
             callbackManager = CallbackManager.Factory.create();
@@ -270,8 +263,8 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
             });
         }
     }
+    //Al presionar boton de google
     public void onClickGoogleButton(View view) {
-
         signInGoogle(view);
     }
     public void signInGoogle(View v) {
@@ -292,6 +285,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements TextWatch
             }
         }
     }
+    //Si se autentifica correctamente el usuario, manda los datos al servicio de USUARIO SERVICE para verificar que el usuario exista
     private void handleResult(GoogleSignInResult result){
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();

@@ -1,5 +1,5 @@
 package com.mydomain.cetreexpresv2;
-
+//****************************************CLASE CON CONSTANTES PARA TODA LA APLICACIÓN
 public class Constantes {
 
     static final String URL_SERVICIOS = "https://itzonyoc.mx/www/CetreAppRest/index.php";

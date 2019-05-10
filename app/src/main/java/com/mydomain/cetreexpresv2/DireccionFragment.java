@@ -3,8 +3,6 @@ package com.mydomain.cetreexpresv2;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -23,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -31,7 +28,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +41,12 @@ import java.util.Objects;
  * to handle interaction events.
  * create an instance of this fragment.
  */
+
+//**********************************************FRAGMENTO DE MAPA********************************************
+
+    //En este fragmento se intgresa una dirección y se guarda.
+
+
 @SuppressLint("ValidFragment")
 public class DireccionFragment extends DialogFragment implements OnMapReadyCallback{
     private MapView mapView;
@@ -59,7 +61,7 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
     TextView tv;
     int validacion=0,boton=0;
 
-
+    //-----------------------------------------------------------Metodo que busca la dirección
     public void SearchDirections(View view){
 
         List<Address> list=null;
@@ -105,21 +107,6 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
         this._ctx=home_usuario_confirmar;
         // Required empty public constructor
     }
-   /* /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.* @param param2 Parameter 2.
-     * @return A new instance of fragment DireccionFragment.
-     */
-/*
-    public static DireccionFragment newInstance(String param1) {
-        DireccionFragment fragment = new DireccionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -130,6 +117,7 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    //------------------------------lee los datos guardados anteriormente
     public void loadLLDU(){
         SharedPreferences prefs = Objects.requireNonNull(getContext()).getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
         boton = prefs.getInt("TIPO", -1);
@@ -151,7 +139,7 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
 
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
-
+    //Se declaran los objetos del fragment
         super.onViewCreated(view, savedInstanceState);
         mapView = view.findViewById(R.id.mapViewFragment);
         BtnBuscar=view.findViewById(R.id.Btn_Buscar);
@@ -171,17 +159,20 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
             }
         });
         Aceptar=view.findViewById(R.id.Btn_Aceptar);
+        //Si se presiona el boton de aceptar
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validacion!=0){
                     saveLLDU();
                     Toast.makeText(getActivity(), "Ubicacion agregada, presione el boton de ACTUALIZAR", Toast.LENGTH_LONG).show();
+                    dismiss();
                 }else{
-                    Toast.makeText(getActivity(), "No se ha agregado ninguna ubicación. Presione el boton EDITAR para agregar dirección",
+                    Toast.makeText(getActivity(), "No se ha agregado ninguna ubicación. Presione el boton para agregar dirección",
                             Toast.LENGTH_LONG).show();
+
                 }
-                dismiss();
+
             }
         });
         if(mapView!=null){
@@ -190,6 +181,7 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
             mapView.getMapAsync(this);
         }
     }
+    //Salva los valores obtenidos
     public void saveLLDU(){
         SharedPreferences prefs = Objects.requireNonNull(getActivity()).getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -242,7 +234,7 @@ public class DireccionFragment extends DialogFragment implements OnMapReadyCallb
         }
         gmap.setMyLocationEnabled(false);
         gmap.setMinZoomPreference(12);
-        LatLng ny = new LatLng(19.4978, -99.1269);
+        LatLng ny = new LatLng( -0.225219, -78.5248);
         gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
     }
 

@@ -15,12 +15,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+
+//************************************************************CLASE SIN USO******************************************************************
+
+
+//Se descartó esta pantalla por parte del comprador.
+//Esta clase era el menu principal donde se elegia la categoria
+
+
+//************************************************************CLASE SIN USO******************************************************************
+
+
+
 public class Menu_Usuario_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    int _ID;
+
+    //--------------------------------------------------------------Variables de la clase
     ArrayList<String> Nombre = new ArrayList<>();
     ArrayList<Integer> Id = new ArrayList<>();
     ArrayList<String> Avatar = new ArrayList<>();
@@ -29,7 +42,7 @@ public class Menu_Usuario_Dashboard extends AppCompatActivity implements Navigat
     ImageView imagenPerfil;
     String nombre,cedula;
 
-
+    //--------------------------------------------------------------Metodo onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

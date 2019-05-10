@@ -1,20 +1,15 @@
 package com.mydomain.cetreexpresv2;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -26,15 +21,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,39 +32,41 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+//***************************************************************************NUEVA PANTALLA**********************************************
+
+//Pantalla que remplaza al menu anterior
+//Nueva pantalla donde se elige el servicio que se requiere
+
+//***************************************************************************NUEVA PANTALLA**********************************************
 
 public class HomeUsuario2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, com.google.android.gms.location.LocationListener {
 
+    //--------------------------------------------------Variables de la clase
     private MapView mapView;
     private GoogleMap gmap;
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC4znjtsuSN9zI24KbDDbzZi4-Q3xqGF_s";
-    int _ID;
     ArrayList<String> Nombre = new ArrayList<>();
     ArrayList<Integer> Id = new ArrayList<>();
     ArrayList<String> Avatar = new ArrayList<>();
     String nombre, cedula;
-    Double latitudRecibo = 0.0, longitudRecibo = 0.0;
     LatLng E;
     GoogleApiClient _googleApiClient;
     Location _Location;
     LocationRequest mLocationRequest;
     TextView nombreDrawer,cedulaOcorreoDrawer;
-    ImageView imagenPerfil;
     ActionBarDrawerToggle mDrawerToggle;
 
+    //-------------------------------------------------------Metodo onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Se declaran los objetos a utlizar
         setContentView(R.layout.activity_home_usuario2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Se revisan los permisos de la aplicación
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -90,6 +82,7 @@ public class HomeUsuario2 extends AppCompatActivity
         cedula = getIntent().getExtras().getString("CEDULA");
         setSupportActionBar(toolbar);
         mapView = findViewById(R.id.mapView2);
+        //Se declara el menu lateral
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -97,7 +90,7 @@ public class HomeUsuario2 extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //Se inicializa el mapa
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -111,6 +104,7 @@ public class HomeUsuario2 extends AppCompatActivity
         cedulaOcorreoDrawer.setText(cedula);
         mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(false);
+        //Se declara el boton de cuando se presiona abre el menu lateral
         mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,6 +129,7 @@ public class HomeUsuario2 extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //---------------------------------------------------------------------Botones del menu lateral
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
@@ -185,6 +180,7 @@ public class HomeUsuario2 extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    //--------------------------------------------------------------------Al presionar boton atras
     @Override
     public void onBackPressed() {
 
@@ -217,7 +213,7 @@ public class HomeUsuario2 extends AppCompatActivity
             alertDialog.show();
         }
     }
-
+    //-------------------------------------------------------Al presionar alguno de los servicios
     public void pressButton(View view) {
         Intent i;
 
@@ -225,7 +221,7 @@ public class HomeUsuario2 extends AppCompatActivity
             case R.id.AdondeVamosBTN:
                 i = new Intent(this,Home_Usuarios_Domicilios.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("ID", 1);
+                bundle.putInt("ID", 1);//Cada servicio tiene un ID diferente
                 bundle.putIntegerArrayList("AL_ID", Id);
                 bundle.putStringArrayList("AL_DSC", Nombre);
                 bundle.putStringArrayList("AL_Av", Avatar);
@@ -241,6 +237,8 @@ public class HomeUsuario2 extends AppCompatActivity
                 bundle5.putIntegerArrayList("AL_ID", Id);
                 bundle5.putStringArrayList("AL_DSC", Nombre);
                 bundle5.putStringArrayList("AL_Av", Avatar);
+                bundle5.putString("NOMBRE", nombre);
+                bundle5.putString("CEDULA", cedula);
                 i.putExtras(bundle5);
                 startActivity(i);
                     break;

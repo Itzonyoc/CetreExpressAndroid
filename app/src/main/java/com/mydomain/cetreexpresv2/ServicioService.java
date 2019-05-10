@@ -11,28 +11,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.net.ssl.HttpsURLConnection;
-
 import static com.mydomain.cetreexpresv2.Constantes.RECURSO_SERVICIO;
 import static com.mydomain.cetreexpresv2.Constantes.URL_SERVICIOS;
 
+//---------------------Servicio que obtiene los datos del servicio como el precio, kilometraje, tiempo, etc
 public class ServicioService extends AsyncTask<String,String,String> {
 
+    //-----------------------------------------Variables del servicio
     private ProgressDialog p;
     private boolean error;
-
     private int _Subcategoria_Id;
     Context _ctx;
     private String _Detalles;
     private String _Direccion_Entrega;
+    private String _Direccion_Recibo;
     private Double _Latitud_Recibo;
     private Double _Longitud_Recibo;
     private Double _Latitud_Entrega;
@@ -43,8 +42,6 @@ public class ServicioService extends AsyncTask<String,String,String> {
      View v;
      @SuppressLint("StaticFieldLeak")
      private TextView _PdS,_KmA,_Total;
-
-
     private String Detalles,Direccion_Entrega,Latitud_Recibo,Longitud_Recibo,Latitud_Entrega,Longitud_Entrega,Hora_Entrega,Fecha_Alta,Fecha_Modificacion,mensaje;
     private int ID,SubCategoria_Id,Estatus_Id;
     private Double Subtotal,Km_Adicionales,Monto_Km_Adicionales,Total;
@@ -52,13 +49,17 @@ public class ServicioService extends AsyncTask<String,String,String> {
     ArrayList<Integer> Array_Id = new ArrayList<>();
     ArrayList<String> Array_Avatar = new ArrayList<>();
 
-    public ServicioService(String servicio, int categoriaID, String direccion, Double latitudRecibo,
+
+    //----------------------------------------------------------------------Constructor del servicio
+
+    public ServicioService(String servicio, int categoriaID, String direccion, String addressR, Double latitudRecibo,
                            Double longitudRecibo, Double latitudEntrega, Double longitudEntrega,
                            String hora, String detalles, Context ctx, View view, TextView PDS,
                            TextView KMA, TextView total, ArrayList<Integer> AId,
                            ArrayList<String> ANombre, ArrayList<String> AAvatar) {
         this._Subcategoria_Id=categoriaID;
         this._Direccion_Entrega=direccion;
+        this._Direccion_Recibo=addressR;
         this._Latitud_Recibo=latitudRecibo;
         this._Longitud_Recibo=longitudRecibo;
         this._Latitud_Entrega=latitudEntrega;
@@ -77,7 +78,7 @@ public class ServicioService extends AsyncTask<String,String,String> {
         this.Array_Avatar=AAvatar;
     }
 
-
+    //------------------------------------------Se crea un dialogo de carga mientras el servicio trabaja
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -87,6 +88,8 @@ public class ServicioService extends AsyncTask<String,String,String> {
         p.setCancelable(false);
         p.show();
     }
+
+    //---------------------------------------------Lista donde se guardan los datos del servicio
     public ArrayList<String> Data(){
         TextView tvDE = (TextView) ((Home_Usuario_Confirmar)_ctx).findViewById(R.id.TV_DireccionEntrega);
         TextView tvPS = (TextView) ((Home_Usuario_Confirmar)_ctx).findViewById(R.id.PrecioServicio);
@@ -115,6 +118,9 @@ public class ServicioService extends AsyncTask<String,String,String> {
         list.add(5,"S");
         return list;
     }
+    //---------------------------------------------------------------------Verifica que clase de servicio se necesita.
+    //El patch simplenete actualiza los datos
+    //El post actualiza los datos y los guarda para pedir el servicio
     @Override
     protected String doInBackground(String... strings) {
         boolean _error;
@@ -136,6 +142,8 @@ public class ServicioService extends AsyncTask<String,String,String> {
             return "0";
         }
     }
+
+    //--------------------------------------------------------Metodo POST que guarda los datos
 
     private boolean POST(int _Subcategoria_Id, String _Detalles,String _Direccion_Entrega,
                          Double _Latitud_Recibo,Double _Longitud_Recibo,Double _Latitud_Entrega,
@@ -239,6 +247,7 @@ public class ServicioService extends AsyncTask<String,String,String> {
         }
         return _error;
     }
+    //--------------------------------------------------------Metodo PATCH que actualiza los datos
     private boolean PATCH(int _Subcategoria_Id, String _Detalles,String _Direccion_Entrega,
                          Double _Latitud_Recibo,Double _Longitud_Recibo,Double _Latitud_Entrega,
                          Double _Longitud_Entrega,String _Hora_Entrega){
@@ -341,6 +350,8 @@ public class ServicioService extends AsyncTask<String,String,String> {
         }
         return _error;
     }
+
+    //Despues de ejecutarse el servicio cierra el dialogo de carga y abre la pantalla de confirmación
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
@@ -354,7 +365,8 @@ public class ServicioService extends AsyncTask<String,String,String> {
                 bundle.putString("LongRECIBO",Longitud_Recibo);
                 bundle.putString("LaENTREGA",Latitud_Entrega);
                 bundle.putString("LongENTREGA",Longitud_Entrega);
-                bundle.putString("DEntrega",Direccion_Entrega);
+                bundle.putString("DEntrega",_Direccion_Entrega);
+                bundle.putString("DRecibo",_Direccion_Recibo);
                 bundle.putIntegerArrayList("AL_ID", Array_Id);
                 bundle.putStringArrayList("AL_DSC", Array_Nombre);
                 bundle.putStringArrayList("AL_Av",Array_Avatar);

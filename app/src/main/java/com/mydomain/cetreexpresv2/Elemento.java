@@ -1,5 +1,17 @@
 package com.mydomain.cetreexpresv2;
 
+
+//************************************************************CLASE SIN USO******************************************************************
+
+
+//Se descartó esta pantalla por parte del comprador.
+//Esta clase añadia los datos de cada elemento de la lista
+
+
+//************************************************************CLASE SIN USO******************************************************************
+
+
+
 public class Elemento {
     private String _nombre,_descripcionIzquierda,_DescripcionDerecha,_precio,_Km,_Kg,_hasta,_Msj;
     private Integer _ID,_status_id,categoria_Id;

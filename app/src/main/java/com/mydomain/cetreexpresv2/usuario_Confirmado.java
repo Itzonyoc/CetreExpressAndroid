@@ -21,21 +21,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Objects;
 
+//*************************************************CLASE DE PANTALLA DEL PEDIDO YA CONFIRMADO
 public class usuario_Confirmado extends AppCompatActivity implements OnMapReadyCallback {
+
+    //-----------------------------Variables de la clase
     private MapView mapView;
     private GoogleMap gmap;
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyAaCp__QNhiV-b7V8cTc73wAdOMotzxctA";
-
     String cabecera;
-    int _ID;
     int boton = 0;
-
     ArrayList<String> Nombre = new ArrayList<>();
     ArrayList<Integer> Id = new ArrayList<>();
     ArrayList<String> Avatar = new ArrayList<>();
     String LatR,LatE,LongR,LongE,DireccionEntrega,DireccionRecibo,Total;
     TextView TV_TotalEstimado,Drecibo,Dentrega;
 
+
+    //------------------------------------------------------------------------Metodo onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +51,17 @@ public class usuario_Confirmado extends AppCompatActivity implements OnMapReadyC
         LongR=getIntent().getExtras().getString("LongRECIBO");
         LongE=getIntent().getExtras().getString("LongENTREGA");
         DireccionEntrega=getIntent().getExtras().getString("DEntrega");
+        DireccionRecibo=getIntent().getExtras().getString("DRecibo");
         Total="$ "+ getIntent().getExtras().getString("TOTAL");
         Id= Objects.requireNonNull(getIntent().getExtras()).getIntegerArrayList("AL_ID");
         Nombre=getIntent().getExtras().getStringArrayList("AL_DSC");
         Avatar=getIntent().getExtras().getStringArrayList("AL_Av");
         TV_TotalEstimado=findViewById(R.id.Tv_PTE);
         Dentrega=findViewById(R.id.TV_DireccionEntrega);
+        Drecibo=findViewById(R.id.TV_DireccionRecibo);
         mapView = findViewById(R.id.GoogleMV);
         Dentrega.setText(DireccionEntrega);
+        Drecibo.setText(DireccionRecibo);
         TV_TotalEstimado.setText(Total);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);

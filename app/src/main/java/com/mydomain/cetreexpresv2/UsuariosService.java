@@ -1,12 +1,9 @@
 package com.mydomain.cetreexpresv2;
 
 import android.annotation.SuppressLint;
-
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,18 +17,14 @@ import static com.mydomain.cetreexpresv2.Constantes.RECURSO_LOGIN;
 import static com.mydomain.cetreexpresv2.Constantes.RECURSO_PERSONA;
 import static com.mydomain.cetreexpresv2.Constantes.URL_SERVICIOS;
 
-
+//----------------------------------Servicio que registra o verifica el inicio de sesión del usuario
 public class UsuariosService extends AsyncTask<String,String,String> {
-    static final String SHARED_PREFS = "SharedPrefs";
-    static final String OUTDATA_ACCESS = "OUTDATA_ACCESS";
-    static final String OUTDATA_CEDULA_R = "OUTDATA_CEDULA_R";
-    static final String OUTDATA_CONTRASENA_R = "OUTDATA_CONTRASENA_R";
-    private static final String OUTDATA_CEDULA_A = "OUTDATA_CEDULA_A";
-    private static final String OUTDATA_CONTRASENA_A = "OUTDATA_CONTRASENA_A";
+
+
+    //-----------------------------------------Variables del servicio
     boolean Registro=false;
     boolean Acceso=false;
     private ProgressDialog p;
-
     @SuppressLint("StaticFieldLeak")
     private Context _ctx;
     private String _metodo;
@@ -42,7 +35,7 @@ public class UsuariosService extends AsyncTask<String,String,String> {
     String nombre;
     private String cedula;
 
-
+    //----------------------------------------------------------------------Constructor del servicio
         public UsuariosService(String s, String nom, String n_cedula, String contrasena, Integer id, Context ctx) {
             this._metodo = s;
             this._nombre = nom;
@@ -53,7 +46,7 @@ public class UsuariosService extends AsyncTask<String,String,String> {
             this.p=new ProgressDialog(ctx);
         }
 
-
+    //------------------------------------------Se crea un dialogo de carga mientras el servicio trabaja
     @Override
     protected void onPreExecute() {
             super.onPreExecute();
@@ -63,7 +56,9 @@ public class UsuariosService extends AsyncTask<String,String,String> {
         p.setCancelable(false);
         p.show();
     }
-
+    //---------------------------------------------------------------------Verifica que clase de servicio se necesita.
+    //El GET verifica si existe o no el usuario
+    //El POST registra al usuario
     @Override
     protected String doInBackground(String... strings) {
 
@@ -95,7 +90,7 @@ public class UsuariosService extends AsyncTask<String,String,String> {
                 return "-1";
         }
     }
-
+    //-----------------------------------------------------------------------------------metodo POST
     private boolean POST(String _Nombre, String _N_cedula, String _Contrasena, Integer _Id) {
 
         String _url = String.format("%s%s", URL_SERVICIOS, RECURSO_PERSONA);
@@ -144,7 +139,7 @@ public class UsuariosService extends AsyncTask<String,String,String> {
         }
         return _error;
     }
-
+    //-----------------------------------------------------------------------------------Metodo GET
     private boolean GET(String _N_cedula, String _Contrasena) {
         boolean _error = false;
         String _url = String.format("%s%s", URL_SERVICIOS, RECURSO_LOGIN + "?Numero_Cedula=" + _N_cedula +"&Contrasena="+_Contrasena);
@@ -190,6 +185,7 @@ public class UsuariosService extends AsyncTask<String,String,String> {
         return _error;
     }
 
+    //Despues de ejecutarse el servicio cierra el dialogo de carga y carga los servicios disponibles
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);

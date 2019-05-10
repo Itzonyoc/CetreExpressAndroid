@@ -3,25 +3,23 @@ package com.mydomain.cetreexpresv2;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.JsonReader;
 import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.net.ssl.HttpsURLConnection;
-
 import static com.mydomain.cetreexpresv2.Constantes.RECURSO_SUBCATEGORIA;
 import static com.mydomain.cetreexpresv2.Constantes.URL_SERVICIOS;
 
+//----------------------------------Servicio que lista los datos del elemento seleccionado
 public class SubcategoriaService extends AsyncTask<String,String,String> {
 
+    //-----------------------------------------Variables del servicio
     private ProgressDialog p;
     private String Acceso="Sin_Acceso";
     private int ID,tipo, Categoria_Id;
@@ -36,6 +34,8 @@ public class SubcategoriaService extends AsyncTask<String,String,String> {
     ArrayList<String> Array_Avatar = new ArrayList<>();
     String LatR,LatE,LongR,LongE;
 
+
+    //----------------------------------------------------------------------Constructor del servicio
     public SubcategoriaService(Cetre_Go_Usuario cetre_go_usuario, int id, RecyclerView rv, Application application,
                                RecyclerView.Adapter adapter, ArrayList<Integer> integers, ArrayList<String> nombre, ArrayList<String> avatar, String latR, String latE, String longR, String longE) {
         this.ID=id;
@@ -53,7 +53,7 @@ public class SubcategoriaService extends AsyncTask<String,String,String> {
         this.LongR=longR;
     }
 
-
+    //------------------------------------------Se crea un dialogo de carga mientras el servicio trabaja
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -63,7 +63,8 @@ public class SubcategoriaService extends AsyncTask<String,String,String> {
         p.setCancelable(false);
         p.show();
     }
-
+    //---------------------------------------------------------------------Verifica que clase de servicio se necesita.
+    //El GET verifica los datos para pedir el servico
     @Override
     protected String doInBackground(String... strings) {
 
@@ -77,7 +78,7 @@ public class SubcategoriaService extends AsyncTask<String,String,String> {
         }
         return Acceso;
     }
-
+    //-----------------------------------------------------------------------------------Metodo GET
     private boolean GET() {
         boolean _error = false;
         String _url = String.format("%s%s", URL_SERVICIOS, RECURSO_SUBCATEGORIA+"?Categoria_Id="+ID);
@@ -166,6 +167,7 @@ public class SubcategoriaService extends AsyncTask<String,String,String> {
     }
     private static final String PREFS_TAG = "SharedPrefs";
 
+    //Despues de ejecutarse el servicio cierra el dialogo de carga y carga la lista
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);

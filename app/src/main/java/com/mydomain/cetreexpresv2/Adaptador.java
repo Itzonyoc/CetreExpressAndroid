@@ -12,17 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
+//*****************************************************************************ADAPTADOR QUE SIRVE PARA LISTAR LOS PRODUCTOS DEL SERVICIO
 public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
+    //-------------------------------------------------------------------------Variables de la clase
     private ArrayList<Elemento> elementos;
     private Context context;
     ArrayList<String> Array_Nombre = new ArrayList<>();
@@ -30,6 +27,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     ArrayList<String> Array_Avatar = new ArrayList<>();
     String LatR,LatE,LongR,LongE;
 
+
+    //---------------------------------------------------------------------CONSTRUCTOR DEL ADAPTADOR
     public Adaptador(ArrayList<Elemento> elementos, Context context, ArrayList<Integer> array_Id, ArrayList<String> array_Nombre, ArrayList<String> array_Avatar,String LatR,String LatE,String LongR,String LongE){
 
         this.context=context;
@@ -46,6 +45,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        //Funcion que declara el holder donde se mostrarán los datos
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.elementos_cetre_go,viewGroup,false);
         saveListaData();
         return new ViewHolder(v);
@@ -53,11 +53,13 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        //Funcion que declara cada una de las partes que contiene un elemento como el nombre, precio y descripciones
             final Elemento lista = elementos.get(i);
         viewHolder.tv_Nombre.setText(lista.get_nombre());
         viewHolder.tv_Precio.setText(String.format("$%s", lista.get_precio()));
         viewHolder.tv_DesIz.setText(lista.get_descripcionIzquierda());
         viewHolder.tv_DesDer.setText(lista.get_DescripcionDerecha());
+        //cuando se presiona algún elemento abre una nueva pantalla con los datos obtenidos de el elemento elegido
         viewHolder.ImgBtn.setOnClickListener(new View.OnClickListener() {//---------viewItemClick
             @Override
             public void onClick(View v) {
@@ -107,6 +109,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         saveListaData();
     }
 
+    //--------------------------------------------------------------Guarda los elementos de la lista
     private void saveListaData(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("Shared_Preferences",Context.MODE_PRIVATE );
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -115,16 +118,18 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         editor.putString("lista",json);
         editor.apply();
     }
+    //--------------------------------------------------Obtiene la cantidad de elementos en la lista
     @Override
     public int getItemCount() {
         return elementos.size();
     }
-
+    //-----------------------------------------------------Clase que delcara los elemntos del objeto
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_Nombre,tv_Precio,tv_DesIz,tv_DesDer;
         Button btn;
         ImageButton ImgBtn;
 
+        //--------------------------------------------------Se declaran los elementos de cada objeto
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             tv_Nombre=itemView.findViewById(R.id.Nombre);
